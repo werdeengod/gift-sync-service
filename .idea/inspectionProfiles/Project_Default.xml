@@ -1,0 +1,94 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyChainedComparisonsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoreConstantInTheMiddle" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="18">
+            <item index="0" class="java.lang.String" itemvalue="tortoise" />
+            <item index="1" class="java.lang.String" itemvalue="aiocryptopay" />
+            <item index="2" class="java.lang.String" itemvalue="beautifulsoup4" />
+            <item index="3" class="java.lang.String" itemvalue="aiohappyeyeballs" />
+            <item index="4" class="java.lang.String" itemvalue="aiohttp-socks" />
+            <item index="5" class="java.lang.String" itemvalue="uaviak-parser" />
+            <item index="6" class="java.lang.String" itemvalue="typing-extensions" />
+            <item index="7" class="java.lang.String" itemvalue="myttableapi" />
+            <item index="8" class="java.lang.String" itemvalue="frozenlist" />
+            <item index="9" class="java.lang.String" itemvalue="attrs" />
+            <item index="10" class="java.lang.String" itemvalue="propcache" />
+            <item index="11" class="java.lang.String" itemvalue="multidict" />
+            <item index="12" class="java.lang.String" itemvalue="soupsieve" />
+            <item index="13" class="java.lang.String" itemvalue="aiohttp" />
+            <item index="14" class="java.lang.String" itemvalue="python-socks" />
+            <item index="15" class="java.lang.String" itemvalue="yarl" />
+            <item index="16" class="java.lang.String" itemvalue="aiosignal" />
+            <item index="17" class="java.lang.String" itemvalue="idna" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E231" />
+          <option value="W604" />
+          <option value="E131" />
+          <option value="E221" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+          <option value="N803" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyTypeCheckerInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="tortoise.queryset.QuerySetSingle.*" />
+          <option value="tortoise.models.Model.id" />
+          <option value="tortoise.models.Model.guild" />
+          <option value="tortoise.models.Model.*" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.permissions" />
+          <option value="bot.chatbot.ui.modal.admin_modal.EditFieldModelModal.item" />
+          <option value="tortoise.fields.relational.RelationalField.name" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.id" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.guild" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.amount" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.resource" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.item" />
+          <option value="str.name" />
+          <option value="bot.database.dbmodels.abstract_base_model.AbstractBaseModel.*" />
+          <option value="pycasino.game.abstract.abstract_game.AbstractGame.player_hand" />
+          <option value="pycasino.abstract.abstract_game.AbstractGame.player_hand" />
+          <option value="tortoise.fields.relational.RelationalField.referral" />
+          <option value="tortoise.fields.relational.RelationalField.division" />
+          <option value="tortoise.fields.relational.RelationalField.*" />
+          <option value="pycasino.game.abc.abstract_game.AbstractGame.*" />
+          <option value="disnake.interactions.message.MessageInteraction.edit_message" />
+          <option value="disnake.ui.item.Item.label" />
+          <option value="disnake.interactions.application_command.ApplicationCommandInteraction.gc" />
+          <option value="disnake.ui.view.View.back_button_payload" />
+          <option value="bot.discord.ui.base.BaseView.*" />
+          <option value="disnake.interactions.message.MessageInteraction.controller_callback" />
+          <option value="tuple.check_type" />
+          <option value="tuple.separate" />
+          <option value="type.find" />
+          <option value="type.NAME" />
+          <option value="bot.discord.ui.views.admin.edit_mbuilding_category_view.EditMBuildingCategoryView.*" />
+          <option value="disnake.interactions.message.MessageInteraction.value" />
+          <option value="disnake.interactions.base.Interaction.component" />
+          <option value="disnake.interactions.base.Interaction.values" />
+          <option value="requester" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

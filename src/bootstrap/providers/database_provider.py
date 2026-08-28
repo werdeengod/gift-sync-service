@@ -1,0 +1,49 @@
+from contextlib import asynccontextmanager
+from dishka import Provider, Scope, provide, FromDishka
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+
+from src.domain.ports.database import UoWPort
+from src.infrastructure.database import SQLAlchemyUoW, Base
+from src.config import config
+
+
+class DatabaseProvider(Provider):
+    @provide(scope=Scope.APP)
+    @asynccontextmanager
+    async def get_engine(self) -> async_sessionmaker[AsyncSession]:
+        engine = create_async_engine(
+            config.db_url,
+            pool_size=10,
+            max_overflow=20,
+            pool_pre_ping=True,
+            echo=True,
+        )
+
+        session_maker = async_sessionmaker(
+            engine,
+            class_=AsyncSession,
+            expire_on_commit=False,
+            autocommit=False,
+            autoflush=False,
+        )
+
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+
+        try:
+            yield session_maker
+        finally:
+            await engine.dispose()
+
+    @provide(scope=Scope.REQUEST)
+    @asynccontextmanager
+    async def get_session(self, session_maker: FromDishka[async_sessionmaker[AsyncSession]]) -> AsyncSession:
+        async with session_maker() as session:
+            try:
+                yield session
+            finally:
+                await session.close()
+
+    @provide(scope=Scope.REQUEST, provides=UoWPort)
+    async def get_uow(self, session: FromDishka[AsyncSession]) -> SQLAlchemyUoW:
+        return SQLAlchemyUoW(session)

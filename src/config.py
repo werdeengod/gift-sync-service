@@ -1,0 +1,30 @@
+from pydantic_settings import BaseSettings
+
+
+class Settings(BaseSettings):
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_NAME: str
+    DB_PORT: int
+    DB_HOST: str
+
+    KAFKA_BOOTSTRAP_SERVERS: str
+    JWT_SECRET_KEY: str
+
+    TELEGRAM_SESSION_NAME: str
+    TELEGRAM_API_ID: int
+    TELEGRAM_API_HASH: str
+    PHONE: str
+
+    DEBUG: bool
+
+    @property
+    def db_url(self):
+        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+    class Config:
+        env_file = '../.env'
+        env_file_encoding = 'utf-8'
+
+
+config = Settings()

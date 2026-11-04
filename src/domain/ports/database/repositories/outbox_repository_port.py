@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 if TYPE_CHECKING:
     from uuid7 import UUID
-    from src.domain.entities import OutboxMessage
+    from src.domain.ports.dto import OutboxMessage
     from src.domain.events import DomainEvent, EventStatus
 
 

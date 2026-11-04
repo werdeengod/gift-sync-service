@@ -1,2 +1,2 @@
-from .database import AsyncSessionLocal, Base, init_db, engine
+from .models import Base
 from .uow import SQLAlchemyUoW

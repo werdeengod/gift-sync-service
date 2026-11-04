@@ -1,4 +1,3 @@
-from contextlib import asynccontextmanager
 from dishka import Provider, Scope, provide, FromDishka
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 
@@ -9,7 +8,6 @@ from src.config import config
 
 class DatabaseProvider(Provider):
     @provide(scope=Scope.APP)
-    @asynccontextmanager
     async def get_engine(self) -> async_sessionmaker[AsyncSession]:
         engine = create_async_engine(
             config.db_url,
@@ -36,7 +34,6 @@ class DatabaseProvider(Provider):
             await engine.dispose()
 
     @provide(scope=Scope.REQUEST)
-    @asynccontextmanager
     async def get_session(self, session_maker: FromDishka[async_sessionmaker[AsyncSession]]) -> AsyncSession:
         async with session_maker() as session:
             try:

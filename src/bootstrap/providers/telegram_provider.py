@@ -3,7 +3,7 @@ from dishka import Provider, Scope, provide, FromDishka
 from telethon import TelegramClient
 
 from src.domain.ports.services import TelegramGateway
-from src.infrastructure.gateways.telegram import TelethonGateway, TelegramGiftMapper
+from src.infrastructure.services.telegram import TelethonGateway, TelegramGiftMapper
 from src.config import config
 
 

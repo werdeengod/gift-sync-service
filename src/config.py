@@ -8,8 +8,13 @@ class Settings(BaseSettings):
     DB_PORT: int
     DB_HOST: str
 
-    KAFKA_BOOTSTRAP_SERVERS: str
+    RABBITMQ_HOST: str
+    RABBITMQ_PORT: str
+    RABBITMQ_USER: str
+    RABBITMQ_PASS: str
+
     JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str
 
     TELEGRAM_SESSION_NAME: str
     TELEGRAM_API_ID: int
@@ -21,6 +26,10 @@ class Settings(BaseSettings):
     @property
     def db_url(self):
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+    @property
+    def broker_url(self):
+        return f"amqp://{self.RABBITMQ_USER}:{self.RABBITMQ_PASS}@{self.RABBITMQ_HOST}:{self.RABBITMQ_PORT}/"
 
     class Config:
         env_file = '../.env'

@@ -1,6 +1,6 @@
 from src.infrastructure.database.models import Outbox
 from src.infrastructure.mapping import DataMapper
-from src.domain.entities import OutboxMessage
+from src.domain.ports.dto import OutboxMessage
 
 
 class OutboxMapper(DataMapper[OutboxMessage, Outbox]):

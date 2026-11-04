@@ -1,33 +1,51 @@
-from aiokafka import AIOKafkaProducer
 from dishka import Provider, Scope, provide, FromDishka
-from contextlib import asynccontextmanager
+from aio_pika import connect_robust, ExchangeType
+from aio_pika.abc import AbstractRobustConnection, AbstractExchange
 
 from src.domain.ports import EventBusPort
+from src.domain.ports.dto import OutboxMessage
+from src.domain.ports.services import MessageBrokerPort
 from src.domain.ports.database.repositories import OutboxRepositoryPort
-from src.infrastructure.event_bus import EventBus
+from src.infrastructure.serializers import JsonSerializer
+from src.infrastructure.event_bus import OutboxEventPublisher
+from src.infrastructure.services.broker import AioPikaMessageBroker
 from src.config import config
 
 
 class EventProvider(Provider):
-    @provide(scope=Scope.APP, provides=AIOKafkaProducer)
-    @asynccontextmanager
-    async def get_producer(self) -> AIOKafkaProducer:
-        producer = AIOKafkaProducer(
-            bootstrap_servers=config.KAFKA_BOOTSTRAP_SERVERS,
-            enable_idempotence=True,
-        )
-
-        await producer.start()
+    @provide(scope=Scope.APP)
+    async def get_broker_connection(self) -> AbstractRobustConnection:
+        connection = await connect_robust(config.broker_url)
+        await connection.connect()
 
         try:
-            yield producer
+            yield connection
         finally:
-            await producer.stop()
+            await connection.close()
+
+    @provide(scope=Scope.APP)
+    async def get_exchange(self, connection: AbstractRobustConnection) -> AbstractExchange:
+        channel = await connection.channel()
+
+        return await channel.declare_exchange(
+            "gift.events.topic",
+            ExchangeType.TOPIC,
+            durable=True,
+        )
+
+    @provide(scope=Scope.APP, provides=MessageBrokerPort)
+    async def get_message_broker(
+        self,
+        connection: AbstractRobustConnection,
+        exchange: AbstractExchange,
+        json_serializer: JsonSerializer[OutboxMessage]
+    ) -> MessageBrokerPort:
+        return AioPikaMessageBroker(connection, exchange, json_serializer)
 
     @provide(scope=Scope.REQUEST, provides=EventBusPort)
     def get_event_bus(
             self,
             outbox_repo: FromDishka[OutboxRepositoryPort]
-    ) -> EventBus:
-        return EventBus(outbox_repo=outbox_repo)
+    ) -> OutboxEventPublisher:
+        return OutboxEventPublisher(outbox_repo=outbox_repo)
 

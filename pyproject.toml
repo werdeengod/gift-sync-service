@@ -1,12 +1,12 @@
 [project]
-name = "telegram-gifts-api"
+name = "gift-sync-service"
 version = "0.1.0"
 description = ""
 authors = [
     {name = "werdeengod",email = "azverev587@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<4"
 dependencies = [
     "telethon (>=1.44.0,<2.0.0)",
     "fastapi (>=0.140.13,<0.141.0)",
@@ -17,8 +17,8 @@ dependencies = [
     "uvicorn (>=0.51.0,<0.52.0)",
     "dishka (>=1.10.1,<2.0.0)",
     "uuid7-standard (>=1.1.0,<2.0.0)",
-    "aiokafka (>=0.14.0,<0.15.0)",
     "pyjwt (>=2.13.0,<3.0.0)",
+    "aio-pika (>=10.2.2,<11.0.0)",
 ]
 
 

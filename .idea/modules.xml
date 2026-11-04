@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/telegram-gifts-api.iml" filepath="$PROJECT_DIR$/.idea/telegram-gifts-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gift-sync-service.iml" filepath="$PROJECT_DIR$/.idea/gift-sync-service.iml" />
     </modules>
   </component>
 </project>

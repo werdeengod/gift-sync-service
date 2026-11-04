@@ -3,10 +3,10 @@ from dishka import FromDishka
 from sqlalchemy.exc import TimeoutError as DatabaseTimeoutError
 
 from src.domain.events import EventStatus
-from src.domain.entities import OutboxMessage
+from src.domain.ports.dto import OutboxMessage
 from src.domain.ports.database.repositories import OutboxRepositoryPort
 from src.domain.ports.database import UoWPort
-from src.infrastructure.worker.entites import Context
+from src.infrastructure.worker import Context
 
 
 async def outbox_fallback(

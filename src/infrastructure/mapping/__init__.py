@@ -1,1 +1,1 @@
-from .base import DataMapper
+from .data_mapper import DataMapper

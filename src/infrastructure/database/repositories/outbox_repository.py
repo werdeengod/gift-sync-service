@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
     from src.infrastructure.serializers import Serializer
     from src.infrastructure.mapping import DataMapper
-    from src.domain.entities import OutboxMessage
+    from src.domain.ports.dto import OutboxMessage
     from src.domain.events import DomainEvent
 
 

@@ -1,6 +1,7 @@
 from dishka import Provider, Scope, provide, FromDishka
 
-from src.domain.entities import Gift, OutboxMessage
+from src.domain.entities import Gift
+from src.domain.ports.dto import OutboxMessage
 from src.domain.events import DomainEvent
 from src.infrastructure.serializers import GiftSerializer, EventSerializer, JsonSerializer, OutboxMessageSerializer
 

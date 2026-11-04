@@ -1,5 +1,6 @@
 from src.domain.events import DomainEvent
-from src.domain.entities import Gift, OutboxMessage
+from src.domain.ports.dto import OutboxMessage
+from src.domain.entities import Gift
 from .base import Serializer
 
 

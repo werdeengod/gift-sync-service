@@ -9,10 +9,10 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class EventBus(EventBusPort):
+class OutboxEventPublisher(EventBusPort):
     def __init__(self, outbox_repo: 'OutboxRepositoryPort'):
         self.outbox_repo = outbox_repo
 
     async def publish(self, event: 'DomainEvent') -> None:
-        logger.debug(f"Event saved in outbox: {event.event_type} (id={event.event_id})")
         await self.outbox_repo.save(event)
+        logger.debug(f"Event saved in outbox: {event.event_type} (id={event.event_id})")

@@ -9,7 +9,7 @@ class GiftMapper(DataMapper[Gift, GiftORM]):
         return Gift(
             stars=model.stars,
             date=model.date,
-            title=GiftTitle(model.title),
+            title=GiftTitle(value=model.title),
             telegram_id=model.telegram_id,
             availability_total=model.availability_total,
             limited=model.limited,

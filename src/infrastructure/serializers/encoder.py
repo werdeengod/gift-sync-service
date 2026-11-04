@@ -19,3 +19,7 @@ class JSONEncoder(json.JSONEncoder):
             return obj.value
 
         return super().default(obj)
+
+
+def json_serializer(obj):
+    return json.dumps(obj, cls=JSONEncoder)

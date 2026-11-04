@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 from unittest.mock import call, ANY
 import pytest
 
-from tests.unit.factories import GiftFactory
+from tests.factories import GiftFactory
 
 if TYPE_CHECKING:
     from src.application.use_cases import SyncGiftsUseCase

@@ -2,9 +2,9 @@ from datetime import datetime
 
 from uuid7 import UUID
 from sqlalchemy import Index
-from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy.types import String, DateTime, Integer, BigInteger, Boolean, Enum as SA_Enum, UUID as SA_UUID, JSON
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import mapped_column, Mapped, declarative_base
+from sqlalchemy.types import String, DateTime, Integer, BigInteger, Boolean, Enum as SA_Enum, UUID as SA_UUID
+from sqlalchemy.dialects.postgresql import JSONB
 
 from src.domain.events import EventType, EventStatus
 
@@ -35,14 +35,24 @@ class Outbox(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     event_id: Mapped[UUID] = mapped_column(SA_UUID(as_uuid=True), unique=True, index=True)
-    event_type: Mapped[EventType] = mapped_column(SA_Enum(EventType, name="event_type"))
+
+    event_type: Mapped[EventType] = mapped_column(SA_Enum(
+        EventType,
+        name="event_type",
+        values_callable=lambda enum_cls: [e.value for e in enum_cls]
+    ))
+
     occurred_at: Mapped[DateTime] = mapped_column(DateTime)
-    payload: Mapped[dict] = mapped_column(JSON)
+    payload: Mapped[dict] = mapped_column(JSONB)
 
     sent_at: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
 
     status: Mapped[EventStatus] = mapped_column(
-        SA_Enum(EventStatus, name="event_status"),
+        SA_Enum(
+            EventStatus,
+            values_callable=lambda enum_cls: [e.value for e in enum_cls],
+            name="event_status",
+        ),
         server_default=EventStatus.PENDING.value,
         index=True
     )

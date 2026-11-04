@@ -9,7 +9,7 @@ class MapperProvider(Provider):
         return GiftMapper()
 
     @provide(scope=Scope.APP)
-    def get_database_gift_mapper(self) -> OutboxMapper:
+    def get_database_outbox_mapper(self) -> OutboxMapper:
         return OutboxMapper()
 
 

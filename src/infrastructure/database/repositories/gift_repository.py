@@ -30,7 +30,7 @@ class GiftRepository(GiftRepositoryPort):
         )
 
         result = await self.session.execute(stmt)
-        model = result.first()
+        model = result.scalar_one_or_none()
 
         if not model:
             return None
@@ -58,7 +58,7 @@ class GiftRepository(GiftRepositoryPort):
         )
         await self.session.execute(stmt)
 
-    async def update_from_dict(self, gift_id: int, **kwargs) -> Optional['Gift']:
+    async def patch(self, gift_id: int, **kwargs) -> Optional['Gift']:
         stmt = (
             update(GiftORM)
             .where(GiftORM.telegram_id == gift_id)

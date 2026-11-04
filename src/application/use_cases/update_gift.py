@@ -31,7 +31,7 @@ class UpdateGiftUseCase:
         async with self.uow.transaction():
             validated_title = GiftTitle(data.title)
 
-            gift = await self.gift_repo.update_from_dict(
+            gift = await self.gift_repo.patch(
                 gift_id=data.gift_id,
                 title=str(validated_title)
             )

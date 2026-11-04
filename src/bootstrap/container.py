@@ -1,4 +1,6 @@
 from dishka import make_async_container
+
+from src.config import config
 from src.bootstrap.providers import (
     DatabaseProvider,
     RepositoryProvider,
@@ -12,10 +14,10 @@ from src.bootstrap.providers import (
 
 def build_container():
     return make_async_container(
-        DatabaseProvider(),
+        DatabaseProvider(config.db_url),
         RepositoryProvider(),
         TelegramProvider(),
-        EventProvider(),
+        EventProvider(config.broker_url),
         SerializerProvider(),
         MapperProvider(),
         UseCaseProvider()

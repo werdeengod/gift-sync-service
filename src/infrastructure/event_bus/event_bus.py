@@ -1,9 +1,10 @@
 from typing import TYPE_CHECKING
 import logging
 
+from src.domain.ports import EventBusPort
+
 if TYPE_CHECKING:
     from src.domain.events import DomainEvent
-    from src.domain.ports import EventBusPort
     from src.domain.ports.database.repositories import OutboxRepositoryPort
 
 logger = logging.getLogger(__name__)

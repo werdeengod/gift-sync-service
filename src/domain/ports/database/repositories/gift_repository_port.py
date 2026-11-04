@@ -19,9 +19,9 @@ class GiftRepositoryPort(ABC):
         pass
 
     @abstractmethod
-    async def update(self, gift: 'Gift') -> None:
+    async def update(self, gift: 'Gift') -> Optional['Gift']:
         pass
 
     @abstractmethod
-    async def update_from_dict(self, gift_id: int, **kwargs: dict) -> Optional['Gift']:
+    async def patch(self, gift_id: int, **kwargs: dict) -> Optional['Gift']:
         pass

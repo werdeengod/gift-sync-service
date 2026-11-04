@@ -3,7 +3,7 @@ import pytest
 
 from src.application.dto import UpdateGiftData
 from src.domain.exceptions import PermissionDeniedError, ValidationError
-from tests.unit.factories import UserFactory
+from tests.factories import UserFactory
 
 if TYPE_CHECKING:
     from src.application.use_cases import UpdateGiftUseCase

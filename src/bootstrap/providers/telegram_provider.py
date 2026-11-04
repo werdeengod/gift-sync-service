@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from collections.abc import AsyncIterable
 from dishka import Provider, Scope, provide, FromDishka
 from telethon import TelegramClient
 
@@ -10,7 +11,7 @@ from src.config import config
 class TelegramProvider(Provider):
     @provide(scope=Scope.APP, provides=TelegramClient)
     @asynccontextmanager
-    async def get_telegram_client(self) -> TelegramClient:
+    async def get_telegram_client(self) -> AsyncIterable[TelegramClient]:
         client = TelegramClient(
             session=config.TELEGRAM_SESSION_NAME,
             api_id=config.TELEGRAM_API_ID,

@@ -1,10 +1,11 @@
 from typing import TYPE_CHECKING
 from aio_pika import Message, DeliveryMode
 
+from src.domain.ports.services import MessageBrokerPort
+
 if TYPE_CHECKING:
     from aio_pika.abc import AbstractRobustConnection, AbstractExchange
     from src.infrastructure.serializers import JsonSerializer
-    from src.domain.ports.services import MessageBrokerPort
     from src.domain.ports.dto import OutboxMessage
 
 

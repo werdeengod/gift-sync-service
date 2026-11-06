@@ -16,7 +16,11 @@ def build_container():
     return make_async_container(
         DatabaseProvider(config.db_url),
         RepositoryProvider(),
-        TelegramProvider(),
+        TelegramProvider(
+            session=config.TELEGRAM_SESSION_STRING,
+            api_hash=config.TELEGRAM_API_HASH,
+            api_id=config.TELEGRAM_API_ID
+        ),
         EventProvider(config.broker_url),
         SerializerProvider(),
         MapperProvider(),

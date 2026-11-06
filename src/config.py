@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str
 
-    TELEGRAM_SESSION_NAME: str
+    TELEGRAM_SESSION_STRING: str
     TELEGRAM_API_ID: int
     TELEGRAM_API_HASH: str
     PHONE: str

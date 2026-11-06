@@ -2,20 +2,27 @@ from contextlib import asynccontextmanager
 from collections.abc import AsyncIterable
 from dishka import Provider, Scope, provide, FromDishka
 from telethon import TelegramClient
+from telethon.sessions import StringSession
 
 from src.domain.ports.services import TelegramGateway
 from src.infrastructure.services.telegram import TelethonGateway, TelegramGiftMapper
-from src.config import config
 
 
 class TelegramProvider(Provider):
+    def __init__(self, session: str, api_id: int, api_hash: str):
+        super().__init__()
+
+        self.session = session
+        self.api_id = api_id
+        self.api_hash = api_hash
+
     @provide(scope=Scope.APP, provides=TelegramClient)
     @asynccontextmanager
     async def get_telegram_client(self) -> AsyncIterable[TelegramClient]:
         client = TelegramClient(
-            session=config.TELEGRAM_SESSION_NAME,
-            api_id=config.TELEGRAM_API_ID,
-            api_hash=config.TELEGRAM_API_HASH,
+            session=StringSession(self.session),
+            api_id=self.api_id,
+            api_hash=self.api_hash
         )
 
         async with client:

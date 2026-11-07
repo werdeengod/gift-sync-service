@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from src.domain.ports.services import MessageBrokerPort
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_publish(message_broker: 'MessageBrokerPort', rabbitmq_url):
     message = OutboxMessageFactory.create_outbox_message()
     await message_broker.publish(message)

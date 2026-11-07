@@ -16,14 +16,14 @@ async def _create_gifts(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort'):
         await gift_repository.save_all(gifts)
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_create_and_get_gift(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort'):
     await _create_gifts(uow, gift_repository)
     gifts_from_db = await gift_repository.get_all()
     assert len(gifts_from_db) == 2
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_update_gift(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort'):
     await _create_gifts(uow, gift_repository)
 
@@ -37,7 +37,7 @@ async def test_update_gift(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort'
     assert updated_gift.title.value == "New Title"
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_patch_gift(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort'):
     await _create_gifts(uow, gift_repository)
 
@@ -48,7 +48,7 @@ async def test_patch_gift(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort')
     assert updated_gift.title.value == "New gift"
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_failed_patch_gift(uow: 'UoWPort', gift_repository: 'GiftRepositoryPort'):
     await _create_gifts(uow, gift_repository)
 

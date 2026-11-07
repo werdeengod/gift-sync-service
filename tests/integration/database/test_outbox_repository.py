@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from src.domain.ports.database import UoWPort
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_save_event(uow: 'UoWPort', outbox_repository: 'OutboxRepositoryPort'):
     event = GiftCreated(gift=GiftFactory.create())
 
@@ -20,7 +20,7 @@ async def test_save_event(uow: 'UoWPort', outbox_repository: 'OutboxRepositoryPo
     assert outbox_message.event_id == event.event_id
 
 
-@pytest.mark.asyncio
+@pytest.mark.integration
 async def test_mark_event(uow: 'UoWPort', outbox_repository: 'OutboxRepositoryPort'):
     event = GiftCreated(gift=GiftFactory.create())
 
